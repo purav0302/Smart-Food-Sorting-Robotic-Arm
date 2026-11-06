@@ -1,0 +1,5 @@
+Smart Food-Sorting Robotic Arm Demonstration
+
+This video demonstrates my VEX IQ robotic arm automatically sorting food packaging based on whether it is opened or unopened. The system uses a color sensor to measure hue and brightness values, which the program uses to determine where each item should be placed. The robotic arm then rotates and uses its gripper to move opened packaging into the trash area and unopened food into a separate location.
+
+Demonstration Video: https://www.youtube.com/watch?v=oEPh52w15SI
