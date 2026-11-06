@@ -1,0 +1,218 @@
+#region VEXcode Generated Robot Configuration
+from vex import *
+import urandom
+import math
+
+# Brain should be defined by default
+brain=Brain()
+
+# Robot configuration code
+brain_inertial = Inertial()
+Joint1_motor_a = Motor(Ports.PORT1, True)
+Joint1_motor_b = Motor(Ports.PORT2, False)
+Joint1 = MotorGroup(Joint1_motor_a, Joint1_motor_b)
+Claw = Motor(Ports.PORT3, False)
+Turn360 = Motor(Ports.PORT4, False)
+optical_6 = Optical(Ports.PORT6)
+
+
+
+# generating and setting random seed
+def initializeRandomSeed():
+    wait(100, MSEC)
+    xaxis = brain_inertial.acceleration(XAXIS) * 1000
+    yaxis = brain_inertial.acceleration(YAXIS) * 1000
+    zaxis = brain_inertial.acceleration(ZAXIS) * 1000
+    systemTime = brain.timer.system() * 100
+    urandom.seed(int(xaxis + yaxis + zaxis + systemTime)) 
+    
+# Initialize random seed 
+initializeRandomSeed()
+
+
+# Color to String Helper
+def convert_color_to_string(col):
+    if col == Color.RED:
+        return "red"
+    if col == Color.GREEN:
+        return "green"
+    if col == Color.BLUE:
+        return "blue"
+    if col == Color.WHITE:
+        return "white"
+    if col == Color.YELLOW:
+        return "yellow"
+    if col == Color.ORANGE:
+        return "orange"
+    if col == Color.PURPLE:
+        return "purple"
+    if col == Color.CYAN:
+        return "cyan"
+    if col == Color.RED_VIOLET:
+        return "red_violet"
+    if col == Color.VIOLET:
+        return "violet"
+    if col == Color.BLUE_VIOLET:
+        return "blue_violet"
+    if col == Color.BLUE_GREEN:
+        return "blue_green"
+    if col == Color.YELLOW_GREEN:
+        return "yellow_green"
+    if col == Color.YELLOW_ORANGE:
+        return "yellow_orange"
+    if col == Color.RED_ORANGE:
+        return "red_orange"
+    if col == Color.BLACK:
+        return "black"
+    if col == Color.TRANSPARENT:
+        return "transparent"
+    return ""
+
+#endregion VEXcode Generated Robot Configuration
+from vex import *
+
+# ----- SETUP -----
+brain = Brain()
+
+# Joint1 motor group (ports 1 & 2, port1 reversed)
+joint1 = MotorGroup(Motor(Ports.PORT1, True), Motor(Ports.PORT2))
+
+# Claw motor (assume on port 3)
+claw = Motor(Ports.PORT3)
+
+# 360-degree motor (assume on port 4)
+turn360 = Motor(Ports.PORT4)
+
+# Optical Sensor (assume on port 6)
+optical = Optical(Ports.PORT6)
+
+# Turn ON optical light
+optical.set_light(LedStateType.ON)
+optical.set_light_power(100)
+
+# ====== START OF PROGRAM ======
+# -----------------------------
+# LOOP FOR FIRST FOOD ITEM
+# -----------------------------
+
+# Lift Joint1 100 degrees
+joint1.spin_for(REVERSE, 100, DEGREES)
+
+# Scan optical sensor
+hue_value = optical.hue()
+brightness_value = optical.brightness()
+
+# Print Hue and Brightness
+brain.screen.clear_screen()
+brain.screen.set_cursor(1,1)
+brain.screen.print("Item 1 Scan")
+brain.screen.new_line()
+brain.screen.print("Hue: ")
+brain.screen.print(hue_value)
+brain.screen.new_line()
+brain.screen.print("Brightness: ")
+brain.screen.print(brightness_value)
+
+# Wait 5 seconds
+wait(5, SECONDS)
+
+# Check hue and do actions
+if hue_value >= 295:
+    status = "NOT OPEN"
+    brain.screen.new_line()
+    brain.screen.print("Status: ")
+    brain.screen.print(status)
+    
+    # Actions for NOT OPEN
+    joint1.spin_for(FORWARD, 50, DEGREES)
+    claw.spin_for(FORWARD, 70, DEGREES)
+    joint1.spin_for(REVERSE, 400, DEGREES)
+    wait(0.2, SECONDS)
+    turn360.spin_for(REVERSE, 90, DEGREES, 100, PERCENT)
+    claw.spin_for(REVERSE, 70, DEGREES)
+    turn360.spin_for(FORWARD, 85, DEGREES, 100, PERCENT)
+    wait(1, SECONDS)
+    turn360.spin_for(REVERSE, 45, DEGREES, 100, PERCENT)
+    joint1.spin_for(FORWARD, 400, DEGREES)
+    brain.screen.clear_screen()
+    brain.screen.set_cursor(1,1)
+    brain.screen.print("Item 2 Scan")
+    brain.screen.new_line()
+    brain.screen.print("Hue: ")
+    brain.screen.print(hue_value)
+    brain.screen.new_line()
+    brain.screen.print("Brightness: ")
+    brain.screen.print(brightness_value)
+    wait(5, SECONDS)
+
+else:
+    status = "OPEN"
+    brain.screen.new_line()
+    brain.screen.print("Status: ")
+    brain.screen.print(status)
+    
+    # Actions for OPEN (vise versa)
+    joint1.spin_for(FORWARD, 50, DEGREES)
+    claw.spin_for(FORWARD, 76, DEGREES)
+    joint1.spin_for(FORWARD, 300, DEGREES)
+    wait(0.2, SECONDS)
+    turn360.spin_for(FORWARD, 100, DEGREES, 100, PERCENT)
+    claw.spin_for(REVERSE, 76, DEGREES)
+    
+    # 2nd Food Item:
+    wait(1, SECONDS)
+    turn360.spin_for(FORWARD, 40, DEGREES, 150, PERCENT)
+    wait(1, SECONDS)
+    joint1.spin_for(FORWARD, 390, DEGREES)
+
+    # Scan optical sensor
+hue_value = optical.hue()
+brightness_value = optical.brightness()
+
+# Print Hue and Brightness
+brain.screen.clear_screen()
+brain.screen.set_cursor(1,1)
+brain.screen.print("Item 2 Scan")
+brain.screen.new_line()
+brain.screen.print("Hue: ")
+brain.screen.print(hue_value)
+brain.screen.new_line()
+brain.screen.print("Brightness: ")
+brain.screen.print(brightness_value)
+
+# Wait 5 seconds
+wait(1, SECONDS)
+
+# Check hue and do actions
+if hue_value >= 330:
+    status = "NOT OPEN"
+    brain.screen.new_line()
+    brain.screen.print("Status: ")
+    brain.screen.print(status)
+    
+    # Actions for NOT OPEN
+    claw.spin_for(FORWARD, 76, DEGREES)
+    joint1.spin_for(REVERSE, 400, DEGREES)
+    wait(0.5, SECONDS)
+    turn360.spin_for(REVERSE, 50, DEGREES)
+    claw.spin_for(REVERSE, 76, DEGREES)
+    wait(1, SECONDS)
+    turn360.spin_for(FORWARD, 118, DEGREES)
+    wait(0.5, SECONDS)
+
+else:
+    status = "OPEN"
+    brain.screen.new_line()
+    brain.screen.print("Status: ")
+    brain.screen.print(status)
+    
+    # Actions for OPEN (vise versa)
+    claw.spin_for(FORWARD,70, DEGREES)
+    joint1.spin_for(REVERSE, 400, DEGREES)
+    wait(0.5, SECONDS)
+    turn360.spin_for(FORWARD, 135, DEGREES)
+    claw.spin_for(REVERSE, 70, DEGREES)
+    turn360.spin_for(REVERSE, 70, DEGREES)
+    joint1.spin_for(FORWARD, 300, DEGREES)
+
+    
