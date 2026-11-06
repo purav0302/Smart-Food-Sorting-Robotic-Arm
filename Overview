@@ -1,0 +1,61 @@
+Smart Food-Sorting Robotic Arm
+
+Overview
+
+I designed and built a smart robotic arm using VEX IQ robotics components for the Georgia Student Technology Competition (GASTC), where I earned 3rd place. The goal of this project was to explore how robotics and automated decision-making could help reduce food waste by separating opened food packaging from unopened items.
+
+The robotic arm uses hue and brightness measurements to identify differences in food packaging and determine where each item should be placed. Based on these readings, the system controls the arm's movement to sort opened packaging into a trash area and unopened food into a separate location. Through this project, I gained experience in robotic design, sensor-based programming, and automation.
+
+Components
+
+- VEX IQ Brain
+- VEX IQ Smart Motors
+- VEX IQ color sensor
+- VEX IQ structural beams and connectors
+- VEX IQ gears and axles
+- Robotic arm and gripper mechanism
+- VEX IQ battery
+- Connecting cables
+
+How It Works
+
+1. A food package is placed in the detection area of the robotic arm.
+2. The color sensor measures the hue and brightness of the packaging.
+3. The program analyzes these measurements and compares them with the programmed conditions used to distinguish opened from unopened packaging.
+4. Based on the classification, the VEX IQ Brain determines which sorting location the arm should move toward.
+5. The robotic arm uses its motors and gripper to pick up and move the package.
+6. Opened packaging is directed toward the trash area, while unopened food is placed in a separate location.
+
+Programming
+
+I programmed the VEX IQ robotic arm to use hue and brightness measurements to make sorting decisions. The program processes the sensor readings and determines whether an item should be classified as opened or unopened.
+
+I also programmed the motors to control the arm's rotation, positioning, and gripper movement. Different movement sequences allow the robotic arm to transport items to their assigned locations based on the sensor's measurements.
+
+This project helped me understand how sensor data and conditional programming can be combined to create a robotic system capable of making decisions automatically.
+
+Testing
+
+I evaluated the robotic arm by observing how it responded to food packaging with different hue and brightness values. An important part of the testing process was checking whether the sensor readings could distinguish between the two categories consistently.
+
+I also examined the arm's movements to determine whether the gripper could handle the packaging and whether the motors positioned the arm correctly at each sorting location. The main areas of improvement were classification reliability, arm positioning, and consistency during the sorting process.
+
+Future Improvements
+
+1. Incorporate a camera and machine learning to recognize a wider variety of food packaging.
+2. Improve the sensor system to distinguish opened and unopened packages more reliably under different lighting conditions.
+3. Develop a more advanced gripper capable of handling objects of different shapes and sizes.
+4. Improve the speed and accuracy of the robotic arm's movements.
+5. Expand the sorting system to identify additional categories, such as recyclable packaging and food waste.
+
+Timeline
+
+I began by identifying food waste as a problem that could potentially be addressed through robotics and automation. I then brainstormed different ways to distinguish opened and unopened food packaging and explored using hue and brightness measurements.
+
+Next, I designed and constructed the robotic arm using VEX IQ structural components, motors, and a gripper mechanism. After assembling the structure, I developed the program to process sensor readings and control the arm's sorting movements.
+
+The final stages focused on evaluating the detection system, adjusting the robotic movements, and preparing the project for the Georgia Student Technology Competition, where I earned 3rd place.
+
+Resources
+
+VEX IQ Robotics, VEX IQ Programming, Color Sensors, Hue and Brightness Detection, Mechanical Engineering, Robotic Arms, Sensor-Based Automation, and Waste Management.
